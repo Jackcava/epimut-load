@@ -1,0 +1,14 @@
+[project]
+name = "epimut-load"
+version = "0.1.0"
+description = "Compute Stochastic Epigenetic Mutations (SEMs) and Epigenetic Mutation Load (EML) from DNA methylation data."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas",
+    "numpy",
+    "pyyaml",
+]
+
+[project.scripts]
+epimut-load = "epimut_load.cli:main"
