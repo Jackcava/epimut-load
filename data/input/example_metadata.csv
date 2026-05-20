@@ -1,9 +1,9 @@
 sampleID,group,age,sex,y
-S01,control,10,F,0
-S02,control,12,M,0
+S01,control,1,F,0
+S02,control,2,M,0
 S03,control,11,F,0
 S04,control,13,M,0
-S05,case,10,F,1
+S05,case,5,F,1
 S06,case,12,M,1
 S07,case,11,F,1
 S08,case,13,M,1

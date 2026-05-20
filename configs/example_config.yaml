@@ -27,7 +27,7 @@ reference:
     path: ""
     methylation_matrix: ""
     metadata: ""
-    include_filter: "" # e.g.  "age < 1.0"
+    include_filter: "" # e.g.  "age < 10"
     exclude_filter: "" # e.g. "y.isna()"
 
 
