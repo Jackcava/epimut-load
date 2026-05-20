@@ -59,37 +59,45 @@ S03      | case    |  1
 Example configuration:
 ```yaml
 input:
-  path: data/example
+  path: data/input
   methylation_matrix: example_methylation.csv
   metadata: example_metadata.csv
   sample_id_col: sampleID
+
 
 output:
   path: data/output
   name_exp: example
 
+
 data:
   matrix_type: M_values
   cpg_id_col: CpG
 
+
+# reference
 reference:
-  mode: internal
+  mode: internal # [internal | external]
 
   internal:
     include_filter: "group == 'control'"
-    exclude_filter: ""
+    exclude_filter: "" # e.g. "y.isna()"
 
   external:
     path: ""
     methylation_matrix: ""
     metadata: ""
-    include_filter: ""
-    exclude_filter: ""
+    include_filter: "" # e.g.  "age < 10"
+    exclude_filter: "" # e.g. "y.isna()"
 
+
+# target
 target_samples:
   include_filter: ""
   exclude_filter: ""
 
+
+# SEMs calculation settings
 sem_calling:
   iqr_multiplier: 3
   direction: true
