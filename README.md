@@ -36,28 +36,28 @@ epimut-load run --config configs/example_config.yaml
 Rows should represent CpG sites and columns should represent samples.
 Example:
 
-| CpG        |   S01 |   S02 |  S03 | ...
-| ---------- | ----: | ----: | ---: | ...
-| cg00000001 |  0.12 |  0.18 | 0.15 | ...
-| cg00000002 | -1.20 | -1.10 | 2.90 | ...
-| .......... | ..... | ..... | .... | ...
+CpG        |   S01 |   S02 |  S03
+---------- | ----: | ----: | ---:
+cg00000001 |  0.12 |  0.18 | 0.15
+cg00000002 | -1.20 | -1.10 | 2.90
+.......... | ..... | ..... | ....
 
 
 ### Metadata file
 The metadata file must contain one column matching the sample IDs in the methylation matrix.
 Example:
 
-| sampleID | group   |  y | ...
-| -------- | ------- | -: | ...
-| S01      | control |  0 | ...
-| S02      | control |  0 | ...
-| S03      | case    |  1 | ...
-| ........ | ....... | .. | ...
+sampleID | group   |  y
+-------- | ------- | -:
+S01      | control |  0
+S02      | control |  0
+S03      | case    |  1
+........ | ....... | ..
 
 
 ## Configuration
 Example configuration:
-```
+```yaml
 input:
   path: data/example
   methylation_matrix: example_methylation.csv
