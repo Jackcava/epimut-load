@@ -62,10 +62,10 @@ def filter_meta(meta, include_filter="", exclude_filter=""):
 
     if include_filter != "":
         print("Inclusion filter:", include_filter)
-        meta_filt = meta_filt.query(include_filter)
+        meta_filt = meta_filt.query(include_filter, engine="python")
 
     if exclude_filter != "":
-        print("Exclusion filter:", exclude_filter)
+        print("Exclusion filter:", exclude_filter, engine="python")
         meta_filt = meta_filt.query(f"not ({exclude_filter})")
 
     if include_filter != "" or exclude_filter != "":
