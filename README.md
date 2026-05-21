@@ -1,5 +1,8 @@
 # epimut-load
 
+![Python](https://img.shields.io/badge/python-3-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 `epimut-load` is a lightweight Python command-line tool to detect Stochastic Epigenetic Mutations (SEMs) and compute Epigenetic Mutation Load (EML) from DNA methylation matrices.
 
 The tool is designed to be simple, reproducible, and easy to configure through a YAML file.
