@@ -191,8 +191,8 @@ def compute_eml(meta, outliers, sem_strength, config):
 
     sample_id_col = config["input"]["sample_id_col"]
 
-    eml = outliers.abs().sum()
-    sum_sem = outliers.sum()
+    eml = outliers.abs().sum(axis=0)
+    sum_sem = outliers.sum(axis=0)
 
     meta_out = meta[meta[sample_id_col].isin(outliers.columns)].copy()
 
@@ -202,8 +202,17 @@ def compute_eml(meta, outliers, sem_strength, config):
 
     if sem_strength is not None:
 
-        sum_pos_strength = sem_strength[sem_strength > 0].sum(skipna=True)
-        sum_neg_strength = sem_strength[sem_strength < 0].sum(skipna=True)
+        sem_strength_values = sem_strength.to_numpy(dtype=float)
+
+        sum_pos_strength = pd.Series(
+            np.where(sem_strength_values > 0, sem_strength_values, 0).sum(axis=0),
+            index=sem_strength.columns
+        )
+
+        sum_neg_strength = pd.Series(
+            np.where(sem_strength_values < 0, sem_strength_values, 0).sum(axis=0),
+            index=sem_strength.columns
+        )
 
         meta_out["sum_pos_strength"] = meta_out[sample_id_col].map(sum_pos_strength)
         meta_out["sum_neg_strength"] = meta_out[sample_id_col].map(sum_neg_strength)
