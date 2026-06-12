@@ -3,14 +3,13 @@
 ![Python](https://img.shields.io/badge/python-3-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-`epimut-load` is a lightweight Python command-line tool to detect Stochastic Epigenetic Mutations (SEMs) and compute Epigenetic Mutation Load (EML) from DNA methylation matrices.
+`epimut-load` is a lightweight Python toolkit and command-line tool to detect Stochastic Epigenetic Mutations (SEMs) and compute Epigenetic Mutation Load (EML) from DNA methylation matrices.
 
 The tool is designed to be simple, reproducible, and easy to configure through a YAML file.
 
 ## Features
 
-- Detect stochastic epigenetic mutations using an IQR-based approach
-- Compute sample-level Epigenetic Mutation Load
+- Detect SEMs and compute sample-level EML;
 - Support internal reference cohorts
 - Flexible metadata-based sample filtering
 - Compute SEM direction and SEM strength
@@ -33,6 +32,38 @@ Run the analysis with:
 ```
 epimut-load run --config configs/example_config.yaml
 ```
+
+## Python API
+
+`epimut-load` can also be used as a Python package in external projects.
+
+```python
+from epimut_load.core import run_pipeline
+
+config = {
+    "input": {
+        "path": "data/input",
+        "methylation_matrix": "example_methylation.csv",
+        "metadata": "example_metadata.csv",
+        "sample_id_col": "sampleID",
+    },
+    "output": {
+        "path": "data/output",
+        "name_exp": "example",
+    },
+    "reference": {
+        "internal": {
+            "include_filter": "group == 'control'",
+        }
+    }
+}
+
+run_pipeline(config)
+```
+
+Missing parameters are filled using default settings.
+
+
 
 ## Input files
 ### DNA methylation matrix
