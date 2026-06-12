@@ -250,7 +250,9 @@ def save_outputs(outliers, sem_strength, d_so, meta_out, config):
 def run_pipeline(config_path):
 
     # read config file
-    config = load_config(config_path)
+    # config = load_config(config_path)
+    if isinstance(config_path, (str, Path)):
+        config = load_config(config_path)
 
     # load data
     print("\nLoading input files...")
