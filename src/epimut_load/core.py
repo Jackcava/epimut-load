@@ -11,6 +11,65 @@ def load_config(config_path):
     return config
 
 
+def get_default_config():
+
+    return {
+        "input": {
+            "path": "",
+            "methylation_matrix": "",
+            "metadata": "",
+            "sample_id_col": "sampleID",
+        },
+        "output": {
+            "path": "data/output",
+            "name_exp": "eml",
+        },
+        "data": {
+            "matrix_type": "M_values",
+            "cpg_id_col": "CpG",
+        },
+        "reference": {
+            "mode": "internal",
+            "internal": {
+                "include_filter": "",
+                "exclude_filter": "",
+            },
+            "external": {
+                "path": "",
+                "methylation_matrix": "",
+                "metadata": "",
+                "include_filter": "",
+                "exclude_filter": "",
+            },
+        },
+        "target_samples": {
+            "include_filter": "",
+            "exclude_filter": "",
+        },
+        "sem_calling": {
+            "iqr_multiplier": 3,
+            "direction": True,
+            "compute_strength": True,
+        },
+    }
+
+
+
+def update_config(default_config, user_config):
+
+    config = default_config.copy()
+
+    for key, value in user_config.items():
+
+        if isinstance(value, dict) and key in config:
+            config[key] = update_config(config[key], value)
+        else:
+            config[key] = value
+
+    return config
+
+
+
 def read_file(path):
     path = Path(path)
 
@@ -252,7 +311,14 @@ def run_pipeline(config_path):
     # read config file
     # config = load_config(config_path)
     if isinstance(config_path, (str, Path)):
-        config = load_config(config_path)
+        user_config = load_config(config_path)
+    else:
+        user_config = config_path
+
+    config = update_config(
+        get_default_config(),
+        user_config
+    )
 
     # load data
     print("\nLoading input files...")
